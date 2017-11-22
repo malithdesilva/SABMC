@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MedicalcentreModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="MC_Admin">
+    <Key>
+      <PropertyRef Name="Admin_Id" />
+    </Key>
+    <Property Name="Admin_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Admin_FullName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Admin_UserName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Admin_Password" Type="nvarchar" MaxLength="50" />
+    <Property Name="Admin_ContactNo" Type="int" />
+  </EntityType>
+  <EntityType Name="MC_Ddrug_Stoke">
+    <Key>
+      <PropertyRef Name="Drug_Stoke_pk" />
+    </Key>
+    <Property Name="Drug_Stoke_pk" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Drug_Code" Type="nvarchar" MaxLength="50" />
+    <Property Name="Drug_Name" Type="nvarchar(max)" />
+    <Property Name="Recevive_Date" Type="date" />
+    <Property Name="Expire_Date" Type="date" />
+    <Property Name="Unit" Type="varchar(max)" />
+    <Property Name="Quantitty" Type="int" />
+  </EntityType>
+  <EntityType Name="MC_Drug_Balance">
+    <Key>
+      <PropertyRef Name="Drug_Blance_PK" />
+    </Key>
+    <Property Name="Drug_Blance_PK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Drug_Code" Type="nvarchar" MaxLength="50" />
+    <Property Name="Balance" Type="int" />
+  </EntityType>
+  <EntityType Name="MC_Drug_History">
+    <Key>
+      <PropertyRef Name="Drug_Pk" />
+    </Key>
+    <Property Name="Drug_Pk" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Drug_Name" Type="varchar" MaxLength="50" />
+    <Property Name="Drug_Code" Type="nvarchar" MaxLength="50" />
+    <Property Name="Drug_Qty" Type="int" />
+    <Property Name="Student_History_Pk" Type="int" />
+  </EntityType>
+  <EntityType Name="MC_Student">
+    <Key>
+      <PropertyRef Name="Student_Pk" />
+    </Key>
+    <Property Name="Student_Pk" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Student_Name" Type="varchar" MaxLength="100" />
+    <Property Name="Student_RegNo" Type="varchar" MaxLength="50" />
+    <Property Name="Student_Age" Type="int" />
+    <Property Name="Student_NicNo" Type="varchar" MaxLength="10" />
+    <Property Name="Student_Gender" Type="varchar" MaxLength="10" />
+    <Property Name="Student_DateOfBirth" Type="date" />
+    <Property Name="Student_Faculty" Type="varchar" MaxLength="50" />
+    <Property Name="Student_Year" Type="int" />
+    <Property Name="Student_Rational" Type="varchar" MaxLength="20" />
+    <Property Name="Student_FamilyMembers" Type="int" />
+    <Property Name="Student_FatherName" Type="varchar" MaxLength="50" />
+    <Property Name="Student_MotherName" Type="varchar" MaxLength="50" />
+    <Property Name="Student_Password" Type="nvarchar" MaxLength="50" />
+    <Property Name="Has_Password" Type="int" />
+  </EntityType>
+  <EntityType Name="MC_Student_History">
+    <Key>
+      <PropertyRef Name="Student_History_Pk" />
+    </Key>
+    <Property Name="Student_History_Pk" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Student_Pk" Type="int" Nullable="false" />
+    <Property Name="Disease" Type="nvarchar" MaxLength="100" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="Date" Type="date" />
+    <Property Name="Medical" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_MC_Drug_History_MC_Student_History">
+    <End Role="MC_Student_History" Type="Self.MC_Student_History" Multiplicity="0..1" />
+    <End Role="MC_Drug_History" Type="Self.MC_Drug_History" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MC_Student_History">
+        <PropertyRef Name="Student_History_Pk" />
+      </Principal>
+      <Dependent Role="MC_Drug_History">
+        <PropertyRef Name="Student_History_Pk" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MC_Student_History_MC_Student">
+    <End Role="MC_Student" Type="Self.MC_Student" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="MC_Student_History" Type="Self.MC_Student_History" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MC_Student">
+        <PropertyRef Name="Student_Pk" />
+      </Principal>
+      <Dependent Role="MC_Student_History">
+        <PropertyRef Name="Student_Pk" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="MedicalcentreModelStoreContainer">
+    <EntitySet Name="MC_Admin" EntityType="Self.MC_Admin" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MC_Ddrug_Stoke" EntityType="Self.MC_Ddrug_Stoke" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MC_Drug_Balance" EntityType="Self.MC_Drug_Balance" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MC_Drug_History" EntityType="Self.MC_Drug_History" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MC_Student" EntityType="Self.MC_Student" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MC_Student_History" EntityType="Self.MC_Student_History" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_MC_Drug_History_MC_Student_History" Association="Self.FK_MC_Drug_History_MC_Student_History">
+      <End Role="MC_Student_History" EntitySet="MC_Student_History" />
+      <End Role="MC_Drug_History" EntitySet="MC_Drug_History" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MC_Student_History_MC_Student" Association="Self.FK_MC_Student_History_MC_Student">
+      <End Role="MC_Student" EntitySet="MC_Student" />
+      <End Role="MC_Student_History" EntitySet="MC_Student_History" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,158 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Dosis:400,700' rel='stylesheet' type='text/css'>
+
+    <!-- Bootsrap -->
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Font awesome -->
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+
+    <!-- Owl carousel -->
+    <link href="~/Content/owl.carousel.css" rel="stylesheet" />
+
+    <!-- Template main Css -->
+    <link href="~/Content/style.css" rel="stylesheet" />
+    <link href="~/vendor/metisMenu/metisMenu.min.css" rel="stylesheet" />
+    <link href="~/Content/dist/css/sb-admin-2.min.css" rel="stylesheet" />
+
+    <!-- Modernizr -->
+    <script src="~/scripts/modernizr-2.6.2.js"></script>
+   
+
+
+       
+
+       
+
+    </head>
+    <body><script src="~/Scripts/jquery-3.1.1.min.js"></script>
+        <nav class="navbar-static-top">
+
+            <div class="navbar-top" style="background-color:#8d65f2">
+
+                <div class="container">
+
+
+                    <div class="col-sm-6 col-xs-12">
+
+                        <ul class="list-unstyled list-inline header-contact">
+                            <li> <i class="fa fa-phone"></i> <a href="tel:">+9445225896 </a> </li>
+                            <li> <i class="fa fa-envelope"></i> <a href="mailto:contact@sadaka.org">contact@sab.ac.lk</a> </li>
+                        </ul> <!-- /.header-contact  -->
+
+                    </div>
+
+                    <div class="col-sm-6 col-xs-12 text-right">
+
+                        <ul class="list-unstyled list-inline header-social">
+
+                            <li> <a href="#"> <i class="fa fa-facebook"></i> </a> </li>
+                            <li> <a href="#"> <i class="fa fa-twitter"></i>  </a> </li>
+                            <li> <a href="#"> <i class="fa fa-google"></i>  </a> </li>
+                            <li> <a href="#"> <i class="fa fa-youtube"></i>  </a> </li>
+                            <li> <a href="#"> <i class="fa fa fa-pinterest-p"></i>  </a> </li>
+                        </ul> <!-- /.header-social  -->
+
+                    </div>
+
+
+                </div>
+            </div>
+
+
+
+            <div class="navbar navbar-main" style="background-color:#000000;height:50px;">
+
+                <div class="">
+
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+
+                        </button>
+
+
+                        <a class="navbar-brand" href="http://localhost:46453/McHome/McHomeHandle/Index"><img src="~/Images/sadaka-logo.png" /></a>
+
+                    </div>
+
+                    <div id="navbar" class="navbar-collapse collapse pull-right">
+
+                        <ul class="nav navbar-nav">
+
+                            @*<li>@Html.ActionLink("Home", "Index", "McHomeHandle", new { area = "McHome" }, null)</li>*@
+                           
+                            @if (Session["name"] != null)
+                            {
+
+                                <li>@Html.ActionLink("Edit", "edittudentdetails", "StudentDetails", new { id = Session["nic"], area = "Student" })</li>
+                                <li>@Html.ActionLink("Reset Password", "passwordreset", "StudentDetails", new { area = "Student" }, null)</li>
+                                <li>@Html.ActionLink("My Medical History", "studenthistory", "StudentDetails", new { area = "Student" }, null)</li>
+                                <li>@Html.ActionLink("Log Out", "logoutstudent", "McHomeHandle", new { area = "McHome" }, null)</li>
+                                @*<li>@Html.ActionLink("Logout", "logoutstudent", "StudentDetails", new { area = "Student" }, null)</li>*@
+                                <li><font color="gold"><b><center><h3>Hi @Session["name"]</h3> </center></b></font></li>
+                            }
+                            @if (Session["name"] == null)
+                            {
+                                @*<li>@Html.ActionLink("Login", "Logingstudent", "McHomeHandle", new { area = "McHome" })</li>*@
+
+
+                            }
+
+
+
+                        </ul>
+
+                    </div> <!-- /#navbar -->
+
+                </div> <!-- /.container -->
+
+            </div> <!-- /.navbar-main -->
+
+
+        </nav>
+     
+            @RenderBody()
+
+            <!--  Scripts
+        ================================================== -->
+            <!-- jQuery -->
+            @*<script src="~/scripts/jquery-1.10.2.min.js"></script>*@
+
+            <!-- Bootsrap javascript file -->
+            <script src="~/scripts/bootstrap.min.js"></script>
+
+            <!-- owl carouseljavascript file -->
+            <script src="~/scripts/owl.carousel.min.js"></script>
+
+
+            <!-- Template main javascript -->
+            <script src="~/scripts/main.js"></script>
+            <script src="~/vendor/metisMenu/metisMenu.min.js"></script>
+            <script src="~/Content/dist/js/sb-admin-2.min.js"></script>
+
+
+            <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+            <script>
+                (function (b, o, i, l, e, r) {
+                    b.GoogleAnalyticsObject = l; b[l] || (b[l] =
+                    function () { (b[l].q = b[l].q || []).push(arguments) }); b[l].l = +new Date;
+                    e = o.createElement(i); r = o.getElementsByTagName(i)[0];
+                    e.src = '//www.google-analytics.com/analytics.js';
+                    r.parentNode.insertBefore(e, r)
+                }(window, document, 'script', 'ga'));
+                ga('create', 'UA-XXXXX-X'); ga('send', 'pageview');
+            </script>
+</body>
+</html>

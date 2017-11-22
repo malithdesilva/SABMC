@@ -1,0 +1,188 @@
+﻿@model IEnumerable<SabraMedicalCenter.Models.MC_Student>
+
+@{
+    ViewBag.Title = "";
+    Layout = "~/Areas/Admin/Views/Shared/SideLayout.cshtml";
+}
+@*<script src="~/Scripts/jquery-3.2.1.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>*@
+
+<script src="~/Scripts/jquery-ui.min.js"></script>
+<link href="~/Scripts/jquery-ui.min.css" rel="stylesheet" />
+@*<link href="~/Scripts/jtable/themes/metro/brown/jtable.min.css" rel="stylesheet" />*@
+<link href="~/scripts/jtable/themes/lightcolor/red/jtable.min.css" rel="stylesheet" />
+<script src="~/Scripts/jtable/jquery.jtable.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        debugger;
+        $('#PersonTableContainer').jtable({
+
+
+
+            title: 'Student History',
+            pageSize: 15,
+            sorting: true,
+            paging: true,
+            defaultSorting: 'studentname ASC',
+            actions: {
+
+
+                listAction: '/AdminHandle/showstudentdetails',
+                createAction: '/GettingStarted/CreatePerson',
+                updateAction: '/GettingStarted/UpdatePerson',
+                deleteAction: '/GettingStarted/DeletePerson'
+            },
+
+
+            fields: {
+
+                studentname: {
+                    key: true,
+                    title: 'Student Name',
+                    width: '10%',
+
+                },
+                studentregno: {
+                    title: 'Reg. No',
+                    width: '5%',
+
+                },
+                nicno: {
+                    title: 'National Id No',
+                    width: '10%',
+
+                },
+                gender: {
+                    title: 'Gender',
+                    width: '5%',
+
+                },
+                dataofbirth: {
+                    title: 'Date Of Birth',
+                    width: '10%',
+                    type: 'date'
+
+                },
+                faculty: {
+                    title: 'Faculty',
+                    width: '5%',
+
+                },
+                year: {
+                    title: 'Year',
+                    width: '5%',
+
+                },
+                rationanal: {
+                    title: 'Rational',
+                    width: '10%',
+                    sorting: false,
+
+                },
+                familymembers: {
+                    title: 'Family Members',
+                    width: '10%',
+                    sorting:false,
+                },
+                fathernmae: {
+                    title: 'Fathers Name',
+                    width: '10%',
+                    sorting: false,
+
+                },
+                mothername: {
+                    title: 'Mothers Name',
+                    width: '10%',
+                    sorting: false,
+
+                },
+
+
+            }
+
+
+        });
+        $('#PersonTableContainer').jtable('load');
+        $(".jtable-toolbar").hide();
+
+        $('#studentsearch').click(function () {
+
+            debugger;
+            var selectedtextid = $('#selectedvalue option:selected').text();
+            var selectedvalue = $('#Searchword').val();
+
+            $.ajax({
+                type: "POST",
+                url: "/AdminHandle/AddSessionstudentdetails",
+                //contentType: "application/json; charset=utf-8",
+                data: { selectedtextid: selectedtextid, selectedvalue: selectedvalue },
+                //dataType: "json",
+                success: function (data) {
+
+                    // $("#DrugName").val(null);
+                    //$("#DrugQty").val(null);
+                    debugger;
+                    $('#PersonTableContainer').jtable('load');
+                    $(".jtable-toolbar").hide();
+
+                }
+
+
+            });
+
+        })
+    });
+
+</script>
+<br /> <br /> <br />
+
+<div class="row well">
+    <div class="col-md-4">
+
+        @Html.DropDownList("selectedvalue", new List<SelectListItem>
+
+                {
+                new SelectListItem() { Text ="Select Option" ,Value="selectoption"},
+                new SelectListItem() { Text ="Student Name" ,Value="studentname"},
+                new SelectListItem(){Text ="Student RegNo" ,Value="StudentRegNo"},
+                new SelectListItem(){Text ="Faculty Name" ,Value="FacultyName"}
+                }, new { @class = "form-control" }
+                )
+
+    </div>
+    <div class="row col-md-4">
+        <input type="text" id="Searchword" size="70" class="form-control" />
+    </div>
+    <div class="row col-md-2">
+        <input type="button" id="studentsearch" value="Search" class="btn btn-primary form-control" />
+    </div>
+
+
+    @*<div style="background-color: #FFCCFF">
+            <marquee direction="Up" scrollamount="1"><strong> <a href="#">Simple Marquee With Hyperlink In Up Direction</a></strong></marquee>
+        </div>
+
+
+        <div style="width: 1024px; background-color: #FFFF00;">
+            <marquee direction="left" scrollamount="3"><strong>Left Direction</strong></marquee>
+        </div>
+        <div style="width: 1024px; background-color: #CCFFCC;">
+            <marquee direction="right" scrollamount="3"><strong> Right Direction</strong></marquee>
+        </div>
+        <marquee behavior="scroll" direction="down" scrollamount="3" style="position:absolute; left:200px; top:-240px; width:75px; z-index:1;">
+            <span class="falling1">hhhh</span>
+        </marquee>*@
+
+    <br /> <br /> <br /><br />
+    <div class="container">
+        <div class="row" id="PersonTableContainer"></div>
+    </div>
+</div>
+<div>
+    @Html.ActionLink("Back to List", "AdminPanel", "AdminHandle")
+</div>
+
+
+
+

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="68ed2c31be5d47899dbf944b17d7b8bc" Name="Diagram1" ZoomLevel="95">
+        <EntityTypeShape EntityType="MedicalcentreModel.MC_Admin" Width="1.5" PointX="2.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MedicalcentreModel.MC_Ddrug_Stoke" Width="1.5" PointX="4.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MedicalcentreModel.MC_Drug_Balance" Width="1.5" PointX="6.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MedicalcentreModel.MC_Drug_History" Width="2.5" PointX="5.25" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="MedicalcentreModel.MC_Student" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="MedicalcentreModel.MC_Student_History" Width="1.875" PointX="3" PointY="1.75" IsExpanded="true" />
+        <AssociationConnector Association="MedicalcentreModel.FK_MC_Drug_History_MC_Student_History" ManuallyRouted="false" />
+        <AssociationConnector Association="MedicalcentreModel.FK_MC_Student_History_MC_Student" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

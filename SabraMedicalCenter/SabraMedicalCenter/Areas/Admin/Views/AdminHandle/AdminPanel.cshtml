@@ -1,0 +1,329 @@
+﻿
+@{
+    ViewBag.Title = "";
+    Layout = "~/Areas/Admin/Views/Shared/SideLayout.cshtml";
+}
+<link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Theme style -->
+<link href="~/Content/dist/css/AdminLTE.min.css" rel="stylesheet" />
+
+    <div class="row form-inline">
+        <section class="content-header">
+            <h1>
+                Welcome to Admin Panel -  @User.Identity.Name
+               
+            </h1>
+            
+        </section>
+    </div>
+
+
+    <div class="row">
+        <div class="col-lg-7">
+            <div class="nav-tabs-custom box box-primary">
+                <!-- Tabs within a box -->
+                <ul class="nav nav-tabs pull-right">
+                    @*<li class="active"><a href="#revenue-chart" data-toggle="tab">Area</a></li>*@
+
+                    <li class="pull-left header"><i class="fa fa-inbox"></i>Year @DateTime.Now.Year Sick Summery- Gender Wise</li>
+                </ul>
+                <div class="tab-content no-padding">
+                    <!-- Morris chart - Sales -->
+                    <div class="chart tab-pane active" id="chartDatetime" style="position: relative; height: 300px;"></div>
+
+                </div>
+            </div><!-- /.nav-tabs-custom -->
+        </div>
+        <div class="col-lg-5">
+            <div class="nav-tabs-custom">
+                <!-- Tabs within a box -->
+                <ul class="nav nav-tabs pull-right">
+                    <li class="active"><a href="#revenue-chart" data-toggle="tab"></a></li>
+
+                    <li class="pull-left header"><i class="fa fa-inbox"></i>Monthly Summery-@DateTime.Now.ToString("MMMM")-Faculty Wise</li>
+                </ul>
+                <div class="tab-content no-padding">
+                    <!-- Morris chart - Sales -->
+                    <div class="chart tab-pane active" id="chartContainer" style="position: relative; height: 300px;"></div>
+                    <div class="chart tab-pane" id="sales-chart" style="position: relative; height: 300px;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-7">
+            <div class="nav-tabs-custom">
+                <!-- Tabs within a box -->
+                <ul class="nav nav-tabs pull-right">
+                    <li class="active"><a href="#revenue-chart" data-toggle="tab"></a></li>
+
+                    <li class="pull-left header"><i class="fa fa-inbox"></i>Year @DateTime.Now.Year Sick Summery- Year wise</li>
+                </ul>
+                <div class="tab-content no-padding">
+                    <!-- Morris chart - Sales -->
+                    <div class="chart tab-pane active" id="chartContainer3" style="position: relative; height: 300px;"></div>
+                    <div class="chart tab-pane" id="sales-chart" style="position: relative; height: 300px;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-5">
+
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Urgent drugs (less than 30)</h3>
+                    <div class="box-tools pull-right">
+                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                        <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                    </div>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                    <div class="table-responsive">
+                        <table class="table no-margin">
+                            <thead>
+                                <tr>
+                                    <th>Drug ID</th>
+                                    <th>Drug Name</th>
+                                    <th>Status</th>
+                                    <th>Amount Left</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                               
+                                    @foreach (var item in ViewBag.medeta)
+                                    {
+                                        if (item.balance <= 30)
+                                        {
+                                           
+                                                <tr>
+                                                    <td><a href="pages/examples/invoice.html">@item.drugcode</a></td>
+                                                    <td>@item.drugname</td>
+                                                    <td><span class="label label-danger">Urgent</span></td>
+                                                    <td><div class="sparkbar" data-color="#00a65a" data-height="20">@item.balance</div></td>
+                                                </tr>
+                                          
+                                        }
+
+                                    }
+                               
+</tbody>
+                        </table>
+                    </div><!-- /.table-responsive -->
+                </div><!-- /.box-body -->
+                <div class="box-footer clearfix">
+                    @*<a href="javascript::;" class="btn btn-sm btn-info btn-flat pull-left">Place New Order</a>
+                    <a href="javascript::;" class="btn btn-sm btn-default btn-flat pull-right">View All Orders</a>*@
+                </div><!-- /.box-footer -->
+            </div>
+        </div>
+
+    </div>
+    @*<div class="row">
+        <div class="col-md-7">
+            <div class="box box-info">
+                <div class="box-header">
+                    <i class="fa fa-envelope"></i>
+                    <h3 class="box-title">Quick Email</h3>
+                    <!-- tools box -->
+                    <div class="pull-right box-tools">
+                        <button class="btn btn-info btn-sm" data-widget="remove" data-toggle="tooltip" title="Remove"><i class="fa fa-times"></i></button>
+                    </div><!-- /. tools -->
+                </div>
+                <div class="box-body">
+                    <form action="#" method="post">
+                        <div class="form-group">
+                            <input type="email" class="form-control" name="emailto" placeholder="Email to:" />
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="subject" placeholder="Subject" />
+                        </div>
+                        <div>
+                            <textarea class="textarea" placeholder="Message" style="width: 100%; height: 125px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="box-footer clearfix">
+                    <button class="pull-right btn btn-default" id="sendEmail">Send <i class="fa fa-arrow-circle-right"></i></button>
+                </div>
+            </div>
+        </div><!-- /.col -->
+        <div class="col-md-5"></div>
+    </div>*@
+
+   
+
+
+
+
+<script type="text/javascript">
+        $(function () {
+            debugger;
+            var chart = new CanvasJS.Chart("chartContainer", {
+                title: {
+                    text: "sick record"
+                },
+
+                animationEnabled: true,
+                legend: {
+                    verticalAlign: "center",
+                    horizontalAlign: "left",
+                    fontSize: 20,
+                    fontFamily: "Helvetica"
+                },
+                theme: "theme2",
+                data: [
+
+                {
+                    type: "pie",
+                    indexLabelFontFamily: "Garamond",
+                    indexLabelFontSize: 20,
+                    indexLabel: "{label} {y} students",
+                    startAngle: -20,
+                    showInLegend: true,
+                    toolTipContent: "{label} {y} students",
+                    //dataPoints: [
+                    //    { y: 72.48, legendText: "Google", label: "Google" },
+                    //    { y: 10.39, legendText: "Bing", label: "Bing" },
+                    //    { y: 7.78, legendText: "Yahoo!", label: "Yahoo!" },
+                    //    { y: 7.14, legendText: "Baidu", label: "Baidu" },
+                    //    { y: 0.22, legendText: "Ask", label: "Ask" },
+                    //    { y: 0.15, legendText: "AOL", label: "AOL" },
+                    //    { y: 1.84, legendText: "Others", label: "Others" }
+                    //],
+
+                    //You can add dynamic data from the controller as shown below. Check the controller and uncomment the line which generates dataPoints.
+
+                    dataPoints: @Html.Raw(ViewBag.DataPoints),
+                }
+                ]
+            });
+            chart.render();
+        });
+</script>
+<script type="text/javascript">
+
+    $(function () {
+        var chart = new CanvasJS.Chart("chartDatetime", {
+            theme: "theme2",
+            animationEnabled: true,
+            title: {
+                text: ""
+            },
+            axisX: {
+                title: "Month"
+            },
+            axisY: {
+                title: "No.of Students"
+            },
+
+            data: [
+            {
+                toolTipContent: "{y} Male Students",
+                type: "splineArea",
+                markerSize: 0,
+                showInLegend: true,
+                color: "rgba(54,158,173,.7)",
+                name: "Male Students",
+                //dataPoints: [
+                //{ y: 17363, label: "2005-06" },
+                //{ y: 28726, label: "2006-07" },
+                //{ y: 35000, label: "2007-08" },
+                //{ y: 25250, label: "2008-09" },
+                //{ y: 19750, label: "2009-10" },
+                //{ y: 18850, label: "2010-11" },
+                //{ y: 26700, label: "2011-12" },
+                //{ y: 16000, label: "2012-13" },
+                //{ y: 19000, label: "2013-14" },
+                //{ y: 18000, label: "2014-15" }
+                //],
+
+                //You can add dynamic data from the controller as shown below. Check the controller and uncomment the line which generates dataPoints.
+                dataPoints: @Html.Raw(ViewBag.DataPoints1),
+            },{
+                type: "splineArea",
+                toolTipContent: "{y} Female Students",
+                showInLegend: true,
+                markerSize: 0,
+                color: "rgba(194,70,66,.6)",
+                name: "Female Students",
+                //dataPoints: [
+                //{ x: new Date(2012, 2), y: 1700 },
+                //{ x: new Date(2012, 3), y: 2600 },
+                //{ x: new Date(2012, 4), y: 1000 },
+                //{ x: new Date(2012, 5), y: 1400 },
+                //{ x: new Date(2012, 6), y: 900 },
+                //{ x: new Date(2012, 7), y: 1000 },
+                //{ x: new Date(2012, 8), y: 1200 },
+                //{ x: new Date(2012, 9), y: 5000 },
+                //{ x: new Date(2012, 10), y: 1300 },
+                //{ x: new Date(2012, 11), y: 2300 },
+                //{ x: new Date(2013, 0), y: 2800 },
+                //{ x: new Date(2013, 1), y: 1300 }
+
+                //]
+                dataPoints: @Html.Raw(ViewBag.DataPoints2),
+            }
+            ]
+        });
+
+        chart.render();
+    });
+</script>
+
+<script type="text/javascript">
+
+    $(function () {
+        var chart = new CanvasJS.Chart("chartContainer3", {
+            animationEnabled: true,
+            title: {
+                text: ""
+            },
+            axisY: {
+                title: "Students",
+                //valueFormatString: "#0.#,.",
+            },
+            data: [
+            {
+                type: "stackedColumn",
+                legendText: "Male",
+                //yValueFormatString: "#0.#,.",
+                showInLegend: "true",
+                toolTipContent: "{legendText} {y} students",
+                //dataPoints: [
+                //    { y: 111338, label: "USA" },
+                //    { y: 49088, label: "Russia" },
+                //    { y: 62200, label: "China" },
+                //    { y: 90085, label: "India" },
+                //    { y: 38600, label: "Australia" },
+                //    { y: 48750, label: "SA" }
+                //],
+
+                //You can add dynamic data from the controller as shown below. Check the controller and uncomment the line which generates dataPoints.
+                dataPoints: @Html.Raw(ViewBag.DataPoints3),
+            }, {
+                type: "stackedColumn",
+                legendText: "Female",
+                showInLegend: "true",
+                indexLabel: "#total students",
+                //yValueFormatString: "#0.#,.",
+               // indexLabelFormatString: "#0.#,.",
+                indexLabelPlacement: "outside",
+                toolTipContent: "{legendText} {y} students",
+                //dataPoints: [
+                //    { y: 135305, label: "USA" },
+                //    { y: 107922, label: "Russia" },
+                //    { y: 52300, label: "China" },
+                //    { y: 3360, label: "India" },
+                //    { y: 39900, label: "Australia" },
+                //    { y: 0, label: "SA" }
+                //],
+
+                //You can add dynamic data from the controller as shown below. Check the controller and uncomment the line which generates dataPoints.
+                dataPoints: @Html.Raw(ViewBag.DataPoints4),
+            }
+            ]
+        });
+        chart.render();
+    });
+</script>

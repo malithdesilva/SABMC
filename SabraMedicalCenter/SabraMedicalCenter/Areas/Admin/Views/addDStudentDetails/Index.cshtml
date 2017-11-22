@@ -1,0 +1,94 @@
+﻿@model IEnumerable<SabraMedicalCenter.Areas.Admin.Models.StudentDetails>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.studentregno)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.age)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nicno)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.gender)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dataofbirth)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.faculty)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.year)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.rationanal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.familymembers)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fathernmae)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.mothername)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.studentregno)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.age)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nicno)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.gender)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dataofbirth)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.faculty)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.year)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.rationanal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.familymembers)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fathernmae)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.mothername)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.studentname }) |
+            @Html.ActionLink("Details", "Details", new { id=item.studentname }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.studentname })
+        </td>
+    </tr>
+}
+
+</table>

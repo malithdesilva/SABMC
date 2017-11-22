@@ -1,0 +1,349 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MedicalcentreModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="MC_Admin">
+          <Key>
+            <PropertyRef Name="Admin_Id" />
+          </Key>
+          <Property Name="Admin_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Admin_FullName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Admin_UserName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Admin_Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="Admin_ContactNo" Type="int" />
+        </EntityType>
+        <EntityType Name="MC_Ddrug_Stoke">
+          <Key>
+            <PropertyRef Name="Drug_Stoke_pk" />
+          </Key>
+          <Property Name="Drug_Stoke_pk" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Drug_Code" Type="nvarchar" MaxLength="50" />
+          <Property Name="Drug_Name" Type="nvarchar(max)" />
+          <Property Name="Recevive_Date" Type="date" />
+          <Property Name="Expire_Date" Type="date" />
+          <Property Name="Unit" Type="varchar(max)" />
+          <Property Name="Quantitty" Type="int" />
+        </EntityType>
+        <EntityType Name="MC_Drug_Balance">
+          <Key>
+            <PropertyRef Name="Drug_Blance_PK" />
+          </Key>
+          <Property Name="Drug_Blance_PK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Drug_Code" Type="nvarchar" MaxLength="50" />
+          <Property Name="Balance" Type="int" />
+        </EntityType>
+        <EntityType Name="MC_Drug_History">
+          <Key>
+            <PropertyRef Name="Drug_Pk" />
+          </Key>
+          <Property Name="Drug_Pk" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Drug_Name" Type="varchar" MaxLength="50" />
+          <Property Name="Drug_Code" Type="nvarchar" MaxLength="50" />
+          <Property Name="Drug_Qty" Type="int" />
+          <Property Name="Student_History_Pk" Type="int" />
+        </EntityType>
+        <EntityType Name="MC_Student">
+          <Key>
+            <PropertyRef Name="Student_Pk" />
+          </Key>
+          <Property Name="Student_Pk" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Student_Name" Type="varchar" MaxLength="100" />
+          <Property Name="Student_RegNo" Type="varchar" MaxLength="50" />
+          <Property Name="Student_Age" Type="int" />
+          <Property Name="Student_NicNo" Type="varchar" MaxLength="10" />
+          <Property Name="Student_Gender" Type="varchar" MaxLength="10" />
+          <Property Name="Student_DateOfBirth" Type="date" />
+          <Property Name="Student_Faculty" Type="varchar" MaxLength="50" />
+          <Property Name="Student_Year" Type="int" />
+          <Property Name="Student_Rational" Type="varchar" MaxLength="20" />
+          <Property Name="Student_FamilyMembers" Type="int" />
+          <Property Name="Student_FatherName" Type="varchar" MaxLength="50" />
+          <Property Name="Student_MotherName" Type="varchar" MaxLength="50" />
+          <Property Name="Student_Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="Has_Password" Type="int" />
+        </EntityType>
+        <EntityType Name="MC_Student_History">
+          <Key>
+            <PropertyRef Name="Student_History_Pk" />
+          </Key>
+          <Property Name="Student_History_Pk" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Student_Pk" Type="int" Nullable="false" />
+          <Property Name="Disease" Type="nvarchar" MaxLength="100" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Date" Type="date" />
+          <Property Name="Medical" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_MC_Drug_History_MC_Student_History">
+          <End Role="MC_Student_History" Type="Self.MC_Student_History" Multiplicity="0..1" />
+          <End Role="MC_Drug_History" Type="Self.MC_Drug_History" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MC_Student_History">
+              <PropertyRef Name="Student_History_Pk" />
+            </Principal>
+            <Dependent Role="MC_Drug_History">
+              <PropertyRef Name="Student_History_Pk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MC_Student_History_MC_Student">
+          <End Role="MC_Student" Type="Self.MC_Student" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="MC_Student_History" Type="Self.MC_Student_History" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MC_Student">
+              <PropertyRef Name="Student_Pk" />
+            </Principal>
+            <Dependent Role="MC_Student_History">
+              <PropertyRef Name="Student_Pk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MedicalcentreModelStoreContainer">
+          <EntitySet Name="MC_Admin" EntityType="Self.MC_Admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MC_Ddrug_Stoke" EntityType="Self.MC_Ddrug_Stoke" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MC_Drug_Balance" EntityType="Self.MC_Drug_Balance" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MC_Drug_History" EntityType="Self.MC_Drug_History" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MC_Student" EntityType="Self.MC_Student" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MC_Student_History" EntityType="Self.MC_Student_History" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_MC_Drug_History_MC_Student_History" Association="Self.FK_MC_Drug_History_MC_Student_History">
+            <End Role="MC_Student_History" EntitySet="MC_Student_History" />
+            <End Role="MC_Drug_History" EntitySet="MC_Drug_History" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MC_Student_History_MC_Student" Association="Self.FK_MC_Student_History_MC_Student">
+            <End Role="MC_Student" EntitySet="MC_Student" />
+            <End Role="MC_Student_History" EntitySet="MC_Student_History" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MedicalcentreModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="MC_Admin">
+          <Key>
+            <PropertyRef Name="Admin_Id" />
+          </Key>
+          <Property Name="Admin_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Admin_FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Admin_UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Admin_Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Admin_ContactNo" Type="Int32" />
+        </EntityType>
+        <EntityType Name="MC_Ddrug_Stoke">
+          <Key>
+            <PropertyRef Name="Drug_Stoke_pk" />
+          </Key>
+          <Property Name="Drug_Stoke_pk" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Drug_Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Drug_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Recevive_Date" Type="DateTime" Precision="0" />
+          <Property Name="Expire_Date" Type="DateTime" Precision="0" />
+          <Property Name="Unit" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Quantitty" Type="Int32" />
+        </EntityType>
+        <EntityType Name="MC_Drug_Balance">
+          <Key>
+            <PropertyRef Name="Drug_Blance_PK" />
+          </Key>
+          <Property Name="Drug_Blance_PK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Drug_Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Balance" Type="Int32" />
+        </EntityType>
+        <EntityType Name="MC_Drug_History">
+          <Key>
+            <PropertyRef Name="Drug_Pk" />
+          </Key>
+          <Property Name="Drug_Pk" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Drug_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Drug_Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Drug_Qty" Type="Int32" />
+          <Property Name="Student_History_Pk" Type="Int32" />
+          <NavigationProperty Name="MC_Student_History" Relationship="Self.FK_MC_Drug_History_MC_Student_History" FromRole="MC_Drug_History" ToRole="MC_Student_History" />
+        </EntityType>
+        <EntityType Name="MC_Student">
+          <Key>
+            <PropertyRef Name="Student_Pk" />
+          </Key>
+          <Property Name="Student_Pk" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Student_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Student_RegNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Student_Age" Type="Int32" />
+          <Property Name="Student_NicNo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Student_Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Student_DateOfBirth" Type="DateTime" Precision="0" />
+          <Property Name="Student_Faculty" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Student_Year" Type="Int32" />
+          <Property Name="Student_Rational" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Student_FamilyMembers" Type="Int32" />
+          <Property Name="Student_FatherName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Student_MotherName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Student_Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Has_Password" Type="Int32" />
+          <NavigationProperty Name="MC_Student_History" Relationship="Self.FK_MC_Student_History_MC_Student" FromRole="MC_Student" ToRole="MC_Student_History" />
+        </EntityType>
+        <EntityType Name="MC_Student_History">
+          <Key>
+            <PropertyRef Name="Student_History_Pk" />
+          </Key>
+          <Property Name="Student_History_Pk" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Student_Pk" Type="Int32" Nullable="false" />
+          <Property Name="Disease" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="Medical" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="MC_Drug_History" Relationship="Self.FK_MC_Drug_History_MC_Student_History" FromRole="MC_Student_History" ToRole="MC_Drug_History" />
+          <NavigationProperty Name="MC_Student" Relationship="Self.FK_MC_Student_History_MC_Student" FromRole="MC_Student_History" ToRole="MC_Student" />
+        </EntityType>
+        <Association Name="FK_MC_Drug_History_MC_Student_History">
+          <End Role="MC_Student_History" Type="Self.MC_Student_History" Multiplicity="0..1" />
+          <End Role="MC_Drug_History" Type="Self.MC_Drug_History" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MC_Student_History">
+              <PropertyRef Name="Student_History_Pk" />
+            </Principal>
+            <Dependent Role="MC_Drug_History">
+              <PropertyRef Name="Student_History_Pk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MC_Student_History_MC_Student">
+          <End Role="MC_Student" Type="Self.MC_Student" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="MC_Student_History" Type="Self.MC_Student_History" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MC_Student">
+              <PropertyRef Name="Student_Pk" />
+            </Principal>
+            <Dependent Role="MC_Student_History">
+              <PropertyRef Name="Student_Pk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MedicalcentreEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="MC_Admin" EntityType="Self.MC_Admin" />
+          <EntitySet Name="MC_Ddrug_Stoke" EntityType="Self.MC_Ddrug_Stoke" />
+          <EntitySet Name="MC_Drug_Balance" EntityType="Self.MC_Drug_Balance" />
+          <EntitySet Name="MC_Drug_History" EntityType="Self.MC_Drug_History" />
+          <EntitySet Name="MC_Student" EntityType="Self.MC_Student" />
+          <EntitySet Name="MC_Student_History" EntityType="Self.MC_Student_History" />
+          <AssociationSet Name="FK_MC_Drug_History_MC_Student_History" Association="Self.FK_MC_Drug_History_MC_Student_History">
+            <End Role="MC_Student_History" EntitySet="MC_Student_History" />
+            <End Role="MC_Drug_History" EntitySet="MC_Drug_History" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MC_Student_History_MC_Student" Association="Self.FK_MC_Student_History_MC_Student">
+            <End Role="MC_Student" EntitySet="MC_Student" />
+            <End Role="MC_Student_History" EntitySet="MC_Student_History" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MedicalcentreModelStoreContainer" CdmEntityContainer="MedicalcentreEntities">
+          <EntitySetMapping Name="MC_Admin">
+            <EntityTypeMapping TypeName="MedicalcentreModel.MC_Admin">
+              <MappingFragment StoreEntitySet="MC_Admin">
+                <ScalarProperty Name="Admin_Id" ColumnName="Admin_Id" />
+                <ScalarProperty Name="Admin_FullName" ColumnName="Admin_FullName" />
+                <ScalarProperty Name="Admin_UserName" ColumnName="Admin_UserName" />
+                <ScalarProperty Name="Admin_Password" ColumnName="Admin_Password" />
+                <ScalarProperty Name="Admin_ContactNo" ColumnName="Admin_ContactNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MC_Ddrug_Stoke">
+            <EntityTypeMapping TypeName="MedicalcentreModel.MC_Ddrug_Stoke">
+              <MappingFragment StoreEntitySet="MC_Ddrug_Stoke">
+                <ScalarProperty Name="Drug_Stoke_pk" ColumnName="Drug_Stoke_pk" />
+                <ScalarProperty Name="Drug_Code" ColumnName="Drug_Code" />
+                <ScalarProperty Name="Drug_Name" ColumnName="Drug_Name" />
+                <ScalarProperty Name="Recevive_Date" ColumnName="Recevive_Date" />
+                <ScalarProperty Name="Expire_Date" ColumnName="Expire_Date" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="Quantitty" ColumnName="Quantitty" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MC_Drug_Balance">
+            <EntityTypeMapping TypeName="MedicalcentreModel.MC_Drug_Balance">
+              <MappingFragment StoreEntitySet="MC_Drug_Balance">
+                <ScalarProperty Name="Drug_Blance_PK" ColumnName="Drug_Blance_PK" />
+                <ScalarProperty Name="Drug_Code" ColumnName="Drug_Code" />
+                <ScalarProperty Name="Balance" ColumnName="Balance" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MC_Drug_History">
+            <EntityTypeMapping TypeName="MedicalcentreModel.MC_Drug_History">
+              <MappingFragment StoreEntitySet="MC_Drug_History">
+                <ScalarProperty Name="Drug_Pk" ColumnName="Drug_Pk" />
+                <ScalarProperty Name="Drug_Name" ColumnName="Drug_Name" />
+                <ScalarProperty Name="Drug_Code" ColumnName="Drug_Code" />
+                <ScalarProperty Name="Drug_Qty" ColumnName="Drug_Qty" />
+                <ScalarProperty Name="Student_History_Pk" ColumnName="Student_History_Pk" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MC_Student">
+            <EntityTypeMapping TypeName="MedicalcentreModel.MC_Student">
+              <MappingFragment StoreEntitySet="MC_Student">
+                <ScalarProperty Name="Student_Pk" ColumnName="Student_Pk" />
+                <ScalarProperty Name="Student_Name" ColumnName="Student_Name" />
+                <ScalarProperty Name="Student_RegNo" ColumnName="Student_RegNo" />
+                <ScalarProperty Name="Student_Age" ColumnName="Student_Age" />
+                <ScalarProperty Name="Student_NicNo" ColumnName="Student_NicNo" />
+                <ScalarProperty Name="Student_Gender" ColumnName="Student_Gender" />
+                <ScalarProperty Name="Student_DateOfBirth" ColumnName="Student_DateOfBirth" />
+                <ScalarProperty Name="Student_Faculty" ColumnName="Student_Faculty" />
+                <ScalarProperty Name="Student_Year" ColumnName="Student_Year" />
+                <ScalarProperty Name="Student_Rational" ColumnName="Student_Rational" />
+                <ScalarProperty Name="Student_FamilyMembers" ColumnName="Student_FamilyMembers" />
+                <ScalarProperty Name="Student_FatherName" ColumnName="Student_FatherName" />
+                <ScalarProperty Name="Student_MotherName" ColumnName="Student_MotherName" />
+                <ScalarProperty Name="Student_Password" ColumnName="Student_Password" />
+                <ScalarProperty Name="Has_Password" ColumnName="Has_Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MC_Student_History">
+            <EntityTypeMapping TypeName="MedicalcentreModel.MC_Student_History">
+              <MappingFragment StoreEntitySet="MC_Student_History">
+                <ScalarProperty Name="Student_History_Pk" ColumnName="Student_History_Pk" />
+                <ScalarProperty Name="Student_Pk" ColumnName="Student_Pk" />
+                <ScalarProperty Name="Disease" ColumnName="Disease" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Medical" ColumnName="Medical" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,97 @@
+﻿@model SabraMedicalCenter.Areas.Student.Models.StudentDTO
+
+@{
+    ViewBag.Title = "";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<div class="container">
+    
+</div>
+
+
+@using (Html.BeginForm("Logingstudent", "McHomeHandle", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+   @* <div class="form-horizontal">
+        <h3>Please login</h3>
+        <hr />
+        <div class="jumbotron jumbotron-loging">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.username, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.username, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.username, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.password, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Login" class="btn btn-primary" />
+                </div>
+            </div>
+
+        </div>
+
+        @*<div class="form-group">
+                <div class="col-md-offset-2 col-md-2">
+                    <input type="submit" value="Rest" class="btn btn-primary" />
+                </div>
+            </div>
+        <div>
+
+        </div>
+    </div>*@
+    <div class="container  well" style="border-style:ridge">
+        <font color="red"><h3><b>@ViewBag.Error</b></h3></font>
+            
+                <div class="col-md-6 col-md-offset-3">
+                    <div class="login-panel panel panel-info">
+                        <div class="panel-heading">
+                            <h3>Please Sign In</h3>
+                        </div>
+                        <div class="panel-body center-block">
+                            <form role="form">
+                                <fieldset>
+                                    <div class="form-group">
+                                        @Html.EditorFor(model => model.username, new { htmlAttributes = new { @class = "form-control", placeholder = "User Name" } })
+                                        @Html.ValidationMessageFor(model => model.username, "", new { @class = "text-danger" })
+                                        @*<input class="form-control" placeholder="E-mail" name="email" type="email" autofocus>*@
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "form-control", placeholder = "Password" } })
+                                        @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
+    @*<input class="form-control" placeholder="Password" name="password" type="password" value="">*@
+                                    </div>
+                                    @*<div class="checkbox">
+                                            <label>
+                                                <input name="remember" type="checkbox" value="Remember Me">Remember Me
+                                            </label>
+                                        </div>*@
+                                    <!-- Change this to a button or input when using this as a form -->
+                                    <input type="submit" value="Login" class="btn btn-lg btn-primary btn-block" />
+                                    @*<a href="index.html" class="btn btn-lg btn-success btn-block">Login</a>*@
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            
+        </div>
+
+    
+}
+
+
+

@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MedicalcentreModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="MC_Admin">
+    <Key>
+      <PropertyRef Name="Admin_Id" />
+    </Key>
+    <Property Name="Admin_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Admin_FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Admin_UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Admin_Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Admin_ContactNo" Type="Int32" />
+  </EntityType>
+  <EntityType Name="MC_Ddrug_Stoke">
+    <Key>
+      <PropertyRef Name="Drug_Stoke_pk" />
+    </Key>
+    <Property Name="Drug_Stoke_pk" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Drug_Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Drug_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Recevive_Date" Type="DateTime" Precision="0" />
+    <Property Name="Expire_Date" Type="DateTime" Precision="0" />
+    <Property Name="Unit" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Quantitty" Type="Int32" />
+  </EntityType>
+  <EntityType Name="MC_Drug_Balance">
+    <Key>
+      <PropertyRef Name="Drug_Blance_PK" />
+    </Key>
+    <Property Name="Drug_Blance_PK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Drug_Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Balance" Type="Int32" />
+  </EntityType>
+  <EntityType Name="MC_Drug_History">
+    <Key>
+      <PropertyRef Name="Drug_Pk" />
+    </Key>
+    <Property Name="Drug_Pk" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Drug_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Drug_Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Drug_Qty" Type="Int32" />
+    <Property Name="Student_History_Pk" Type="Int32" />
+    <NavigationProperty Name="MC_Student_History" Relationship="Self.FK_MC_Drug_History_MC_Student_History" FromRole="MC_Drug_History" ToRole="MC_Student_History" />
+  </EntityType>
+  <EntityType Name="MC_Student">
+    <Key>
+      <PropertyRef Name="Student_Pk" />
+    </Key>
+    <Property Name="Student_Pk" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Student_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Student_RegNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Student_Age" Type="Int32" />
+    <Property Name="Student_NicNo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Student_Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Student_DateOfBirth" Type="DateTime" Precision="0" />
+    <Property Name="Student_Faculty" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Student_Year" Type="Int32" />
+    <Property Name="Student_Rational" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Student_FamilyMembers" Type="Int32" />
+    <Property Name="Student_FatherName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Student_MotherName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Student_Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Has_Password" Type="Int32" />
+    <NavigationProperty Name="MC_Student_History" Relationship="Self.FK_MC_Student_History_MC_Student" FromRole="MC_Student" ToRole="MC_Student_History" />
+  </EntityType>
+  <EntityType Name="MC_Student_History">
+    <Key>
+      <PropertyRef Name="Student_History_Pk" />
+    </Key>
+    <Property Name="Student_History_Pk" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Student_Pk" Type="Int32" Nullable="false" />
+    <Property Name="Disease" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Date" Type="DateTime" Precision="0" />
+    <Property Name="Medical" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="MC_Drug_History" Relationship="Self.FK_MC_Drug_History_MC_Student_History" FromRole="MC_Student_History" ToRole="MC_Drug_History" />
+    <NavigationProperty Name="MC_Student" Relationship="Self.FK_MC_Student_History_MC_Student" FromRole="MC_Student_History" ToRole="MC_Student" />
+  </EntityType>
+  <Association Name="FK_MC_Drug_History_MC_Student_History">
+    <End Role="MC_Student_History" Type="Self.MC_Student_History" Multiplicity="0..1" />
+    <End Role="MC_Drug_History" Type="Self.MC_Drug_History" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MC_Student_History">
+        <PropertyRef Name="Student_History_Pk" />
+      </Principal>
+      <Dependent Role="MC_Drug_History">
+        <PropertyRef Name="Student_History_Pk" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MC_Student_History_MC_Student">
+    <End Role="MC_Student" Type="Self.MC_Student" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="MC_Student_History" Type="Self.MC_Student_History" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MC_Student">
+        <PropertyRef Name="Student_Pk" />
+      </Principal>
+      <Dependent Role="MC_Student_History">
+        <PropertyRef Name="Student_Pk" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="MedicalcentreEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="MC_Admin" EntityType="Self.MC_Admin" />
+    <EntitySet Name="MC_Ddrug_Stoke" EntityType="Self.MC_Ddrug_Stoke" />
+    <EntitySet Name="MC_Drug_Balance" EntityType="Self.MC_Drug_Balance" />
+    <EntitySet Name="MC_Drug_History" EntityType="Self.MC_Drug_History" />
+    <EntitySet Name="MC_Student" EntityType="Self.MC_Student" />
+    <EntitySet Name="MC_Student_History" EntityType="Self.MC_Student_History" />
+    <AssociationSet Name="FK_MC_Drug_History_MC_Student_History" Association="Self.FK_MC_Drug_History_MC_Student_History">
+      <End Role="MC_Student_History" EntitySet="MC_Student_History" />
+      <End Role="MC_Drug_History" EntitySet="MC_Drug_History" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MC_Student_History_MC_Student" Association="Self.FK_MC_Student_History_MC_Student">
+      <End Role="MC_Student" EntitySet="MC_Student" />
+      <End Role="MC_Student_History" EntitySet="MC_Student_History" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="MedicalcentreModelStoreContainer" CdmEntityContainer="MedicalcentreEntities">
+    <EntitySetMapping Name="MC_Admin">
+      <EntityTypeMapping TypeName="MedicalcentreModel.MC_Admin">
+        <MappingFragment StoreEntitySet="MC_Admin">
+          <ScalarProperty Name="Admin_Id" ColumnName="Admin_Id" />
+          <ScalarProperty Name="Admin_FullName" ColumnName="Admin_FullName" />
+          <ScalarProperty Name="Admin_UserName" ColumnName="Admin_UserName" />
+          <ScalarProperty Name="Admin_Password" ColumnName="Admin_Password" />
+          <ScalarProperty Name="Admin_ContactNo" ColumnName="Admin_ContactNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MC_Ddrug_Stoke">
+      <EntityTypeMapping TypeName="MedicalcentreModel.MC_Ddrug_Stoke">
+        <MappingFragment StoreEntitySet="MC_Ddrug_Stoke">
+          <ScalarProperty Name="Drug_Stoke_pk" ColumnName="Drug_Stoke_pk" />
+          <ScalarProperty Name="Drug_Code" ColumnName="Drug_Code" />
+          <ScalarProperty Name="Drug_Name" ColumnName="Drug_Name" />
+          <ScalarProperty Name="Recevive_Date" ColumnName="Recevive_Date" />
+          <ScalarProperty Name="Expire_Date" ColumnName="Expire_Date" />
+          <ScalarProperty Name="Unit" ColumnName="Unit" />
+          <ScalarProperty Name="Quantitty" ColumnName="Quantitty" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MC_Drug_Balance">
+      <EntityTypeMapping TypeName="MedicalcentreModel.MC_Drug_Balance">
+        <MappingFragment StoreEntitySet="MC_Drug_Balance">
+          <ScalarProperty Name="Drug_Blance_PK" ColumnName="Drug_Blance_PK" />
+          <ScalarProperty Name="Drug_Code" ColumnName="Drug_Code" />
+          <ScalarProperty Name="Balance" ColumnName="Balance" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MC_Drug_History">
+      <EntityTypeMapping TypeName="MedicalcentreModel.MC_Drug_History">
+        <MappingFragment StoreEntitySet="MC_Drug_History">
+          <ScalarProperty Name="Drug_Pk" ColumnName="Drug_Pk" />
+          <ScalarProperty Name="Drug_Name" ColumnName="Drug_Name" />
+          <ScalarProperty Name="Drug_Code" ColumnName="Drug_Code" />
+          <ScalarProperty Name="Drug_Qty" ColumnName="Drug_Qty" />
+          <ScalarProperty Name="Student_History_Pk" ColumnName="Student_History_Pk" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MC_Student">
+      <EntityTypeMapping TypeName="MedicalcentreModel.MC_Student">
+        <MappingFragment StoreEntitySet="MC_Student">
+          <ScalarProperty Name="Student_Pk" ColumnName="Student_Pk" />
+          <ScalarProperty Name="Student_Name" ColumnName="Student_Name" />
+          <ScalarProperty Name="Student_RegNo" ColumnName="Student_RegNo" />
+          <ScalarProperty Name="Student_Age" ColumnName="Student_Age" />
+          <ScalarProperty Name="Student_NicNo" ColumnName="Student_NicNo" />
+          <ScalarProperty Name="Student_Gender" ColumnName="Student_Gender" />
+          <ScalarProperty Name="Student_DateOfBirth" ColumnName="Student_DateOfBirth" />
+          <ScalarProperty Name="Student_Faculty" ColumnName="Student_Faculty" />
+          <ScalarProperty Name="Student_Year" ColumnName="Student_Year" />
+          <ScalarProperty Name="Student_Rational" ColumnName="Student_Rational" />
+          <ScalarProperty Name="Student_FamilyMembers" ColumnName="Student_FamilyMembers" />
+          <ScalarProperty Name="Student_FatherName" ColumnName="Student_FatherName" />
+          <ScalarProperty Name="Student_MotherName" ColumnName="Student_MotherName" />
+          <ScalarProperty Name="Student_Password" ColumnName="Student_Password" />
+          <ScalarProperty Name="Has_Password" ColumnName="Has_Password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MC_Student_History">
+      <EntityTypeMapping TypeName="MedicalcentreModel.MC_Student_History">
+        <MappingFragment StoreEntitySet="MC_Student_History">
+          <ScalarProperty Name="Student_History_Pk" ColumnName="Student_History_Pk" />
+          <ScalarProperty Name="Student_Pk" ColumnName="Student_Pk" />
+          <ScalarProperty Name="Disease" ColumnName="Disease" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Medical" ColumnName="Medical" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

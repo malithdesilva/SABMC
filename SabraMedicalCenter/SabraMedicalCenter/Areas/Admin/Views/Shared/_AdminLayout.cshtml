@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title -Login Panel</title>
+    @*@Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")*@
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.1.1.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/scripts/bootstrap.min.js"></script>
+    <link href="~/Content/dist/css/sb-admin-2.min.css" rel="stylesheet" />
+    <script src="~/scripts/modernizr-2.6.2.min.js"></script>
+    <link href="~/Content/AdminLayout.css" rel="stylesheet" />
+</head>
+<body @*style="background-image: url('../../../../Images/blue5.jpg');*@ ">
+    <div class="row well-lg">
+        <div class="nav navbar-fixed-top navbar-inverse" @*style="background-image: url('../../../../Images/blue3.jpg');*@ ">
+            <div class="row col-lg-10">
+                <div class="col-lg-4 navbar-header">
+
+                    <div class="col-lg-4 pull-left navbar-brand">
+                        <a href="#" class="">
+                            <img class="logo pull-left" src="~/Images/Logo-SUSL.png" style="height:80px;width:80px;position:absolute;" />
+                        </a>
+                    </div>
+
+                    <div class="col-lg-8">
+                        @Html.ActionLink("MC Admin Panel", "AdminPanel", "AdminHandle", new { area = "Admin", @style = "color:#ffffff; font-size:25px;", @class = "nav navbar-brand" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-2 pull-left">
+                @Html.Partial("_login")
+            </div>
+        </div>
+    </div>
+
+    <div class="row well-lg">
+
+            @RenderBody()
+        </div>
+      
+        <div class="row well-lg">
+            <footerv>
+                <p>&copy; @DateTime.Now.Year -SASHIKA IT Solutions</p>
+            </footerv>
+        </div>
+    
+
+    @*@Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)*@
+</body>
+</html>

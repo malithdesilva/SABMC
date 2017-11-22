@@ -1,0 +1,33 @@
+﻿body {
+}
+.logo{
+ height:80px; width:100px; 
+ margin-top:5px;
+ margin-left:10px;
+ z-index:-30;
+}
+.navigation{
+height:40px;
+color:white;
+background-color:slategrey;
+
+}
+
+.rowtop{
+    height:30px;
+    color:#000000;
+}
+
+body-content{
+    width:70%;
+    float:left;
+
+}
+
+.left-content{
+    background-color:#ffffff;
+    border-radius:5px;
+    -moz-border-radius:5px;
+    -webkit-border-radius:5x;
+       
+}

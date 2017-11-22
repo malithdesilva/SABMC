@@ -1,0 +1,21 @@
+﻿<label>
+    @if (User.Identity.Name.Any())
+    {
+        <h5 class="navbar-right name-colr">Hellooooo @User.Identity.Name !</h5>
+        <h4>@Html.ActionLink("Logout", "Logout", "AdminHandle", new { @style = "color:goldenrod" })</h4>
+    }
+   
+    
+    
+
+</label>
+
+<style>
+
+   .name-colr{
+       color:goldenrod;
+       margin-top:5px;
+       margin-bottom:5px;
+   }
+
+</style>

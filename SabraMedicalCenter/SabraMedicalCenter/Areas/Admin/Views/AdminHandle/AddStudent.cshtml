@@ -1,0 +1,270 @@
+﻿@using SabraMedicalCenter.Areas.Admin.Models
+@model SabraMedicalCenter.Areas.Admin.Models.AddStudent
+
+@{
+    ViewBag.Title = "";
+    Layout = "~/Areas/Admin/Views/Shared/SideLayout.cshtml";
+}
+
+<!-- Theme style -->
+<link href="~/Content/dist/css/AdminLTE.min.css" rel="stylesheet" />
+@using (Html.BeginForm("AddStudent", "AdminHandle", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+
+    <div class="nav-tabs-custom box box-primary">
+        <!-- Tabs within a box -->
+        <ul class="nav nav-tabs pull-right">
+            @*<li class="active"><a href="#revenue-chart" data-toggle="tab">Area</a></li>*@
+
+            <li class="pull-left header"><i class="fa fa-inbox"></i>Add New Student Records</li>
+        </ul>
+        <div class="tab-content no-padding">
+            <div class="row form-horizontal">
+
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Student_Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-5">
+                        @Html.EditorFor(model => model.Student_Name, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Student_Name, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Student_RegNo, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-5">
+                        @Html.EditorFor(model => model.Student_RegNo, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Student_RegNo, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Student_Age, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-5">
+                        @Html.EditorFor(model => model.Student_Age, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Student_Age, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Student_NicNo, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-5">
+                        @Html.EditorFor(model => model.Student_NicNo, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Student_NicNo, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Student_Gender, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-5">
+                        @Html.DropDownListFor(model => model.Student_Gender, new SelectList(Enum.GetValues(typeof(Gender))),
+                    "Select Gender", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Student_Gender, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Student_DateOfBirth, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-5">
+                        @Html.EditorFor(model => model.Student_DateOfBirth, new { htmlAttributes = new { @class = "form-control" } })
+
+                        <h4 class="text-danger">@ViewBag.dateError</h4>
+                        @Html.ValidationMessageFor(model => model.Student_DateOfBirth, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Student_Faculty, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-5">
+                        @Html.DropDownListFor(model => model.Student_Faculty, new SelectList(Enum.GetValues(typeof(Faculties))),
+                    "Select Faculty", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Student_Faculty, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Student_Year, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-5">
+                        @Html.EditorFor(model => model.Student_Year, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Student_Year, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Student_Rational, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-5">
+                        @Html.EditorFor(model => model.Student_Rational, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Student_Rational, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Student_FamilyMembers, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-5">
+                        @Html.EditorFor(model => model.Student_FamilyMembers, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Student_FamilyMembers, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Student_FatherName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-5">
+                        @Html.EditorFor(model => model.Student_FatherName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Student_FatherName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Student_MotherName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-5">
+                        @Html.EditorFor(model => model.Student_MotherName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Student_MotherName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="row col-lg-offset-2 col-lg-6">
+
+                    <input type="submit" value="Add" class="btn btn-primary btn-block btn-sm" />
+                    <br />
+                    <br />
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+     
+
+
+        <button type="button" class="btn btn-info btn-lg" id="hit" data-toggle="modal" data-target="#myModal">Open Modal</button>
+
+        <!-- Modal -->
+        <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title alert-link">Successful</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Students detail successfully saved</p>
+                    </div>
+                    <div class="modal-footer">
+                        @Html.ActionLink("Close", "AdminPanel", "AdminHandle", new { area = "Admin" }, new { @class = "btn btn btn-success btn-lg col-md-2 col-md-offset-5" })
+
+                       @* <button type="button" class="btn btn-default"  data-dismiss="modal">Close</button>*@
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    
+}
+@if (ViewBag.Message != null)
+{
+    <script>
+        debugger;
+        $("#hit").trigger("click");
+      //  $("#myModal").modal();
+    </script>
+} 
+
+<script type="text/javascript">
+    $(document).ready(function () {
+       
+
+
+        $("#hit").hide();
+      
+
+        $("#Student_Name").keyup(function () {
+            var dqty = $("#DrugQty").val();
+            var name = $("#DrugName").val();
+
+
+            debugger;
+
+            $.ajax({
+                type: "POST",
+                url: "/AdminHandle/checkqty",
+                //contentType: "application/json; charset=utf-8",
+                data: { qty: dqty, dname: name },
+                dataType: "json",
+                success: function (data) {
+                    debugger;
+                    if (data == "OK") {
+                        $("#error").hide();
+                    }
+                    else {
+                        $("#error").show();
+                        $("#error").text(data);
+
+                    }
+
+                    // $('#medicaltable').jtable('load');
+
+                }
+
+
+            });
+        });
+        $("#Student_RegNo").keyup(function () {
+            $(".text-danger").hide();
+        });
+        $("#Student_Age").keyup(function () {
+            $(".text-danger").hide();
+        });
+        $("#Student_NicNo").keyup(function () {
+            $(".text-danger").hide();
+        });
+        $("#Student_Gender").keyup(function () {
+            $(".text-danger").hide();
+        });
+        $("#Student_DateOfBirth").click(function () {
+            $(".text-danger").hide();
+        });
+        $("#Student_Faculty").keyup(function () {
+            $(".text-danger").hide();
+        });
+        $("#Student_Rational").keyup(function () {
+            $(".text-danger").hide();
+        });
+        $("#Student_FamilyMembers").keyup(function () {
+            $(".text-danger").hide();
+        });
+        $("#Student_Year").keyup(function () {
+            $(".text-danger").hide();
+        });
+        $("#Student_MotherName").keyup(function () {
+            $(".text-danger").hide();
+        });
+        $("#Student_FatherName").keyup(function () {
+            $(".text-danger").hide(); 
+           
+        });
+        $("#Student_Name").keyup(function () {
+            $(".text-danger").hide(); 
+
+        });
+    });
+
+    @*$(function () {
+        debugger;
+        $("#DrugName").autocomplete({
+            source: '@Url.Action("/GetMedicine")'
+
+        });
+        debugger;
+        $("#error").hide();
+    });*@
+  
+</script>
+
+
+

@@ -1,0 +1,70 @@
+﻿body {
+    background-color:#e6dfdf;
+}
+
+.navbar-ing{
+
+color:#4fb0f7;
+background-color:#25a2fc;
+color:#000000;
+
+}
+
+.navbar-nav{
+    color:#000000;
+    font-size:20px;
+}
+
+.navbar-brand{
+    color:#000000;
+    font-size:30px;
+    font-style:inherit;
+}
+
+.logo {
+    height: 50px;
+    width: 50px;
+    margin-top: 0px;
+    margin-left: 10px;
+}
+
+.jumbotron-border{
+    padding:100px;
+    background:padding-box;
+    background-color:#808080;
+    background-size:contain;
+    box-shadow:100px;
+}
+
+.jumbotron-loging{
+    padding:100px;
+    background:padding-box;
+    background-color:#63b2eb;
+    box-shadow:100px;
+    font:12px;
+}
+
+.font-z{
+
+    font:menu;
+    font-style:normal;
+    color:##000000;
+}
+
+.body-content {
+    width:1000px;
+    height:500px;
+    left:50%;
+    right:50%;
+    box-shadow:10px,10px,10px,10px
+   
+}
+
+.jumbotron-img{
+    color:#25a2fc;
+    
+}
+
+.navbarmain{
+    width:10px;
+}

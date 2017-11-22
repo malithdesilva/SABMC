@@ -1,0 +1,252 @@
+﻿@model SabraMedicalCenter.Areas.Admin.Models.MedicalFormDTO
+
+@{
+    ViewBag.Title = "ordermedical";
+    Layout = "~/Areas/Admin/Views/Shared/SideLayout.cshtml";
+}
+
+
+
+<br />
+<!-- Theme style -->
+<link href="~/Content/dist/css/AdminLTE.min.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-ui.min.js"></script>
+<link href="~/Scripts/jquery-ui.min.css" rel="stylesheet" />
+<link href="~/Content/medicalform.css" rel="stylesheet" />
+@*<link href="~/Scripts/jtable/themes/metro/green/jtable.min.css" rel="stylesheet" />*@
+<link href="~/Scripts/jtable/themes/metro/blue/jtable.min.css" rel="stylesheet" />
+@*<link href="~/Scripts/jtable/themes/lightcolor/blue/jtable.min.css" rel="stylesheet" />*@
+<script src="~/Scripts/jtable/jquery.jtable.min.js"></script>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div id="error"class="alert-danger alert-dismissable">
+        @* <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>*@
+       <h3>Please fill data</h3>
+    </div>
+
+    
+        <div class="nav-tabs-custom box box-primary">
+            <!-- Tabs within a box -->
+            <ul class="nav nav-tabs pull-right">
+                @*<li class="active"><a href="#revenue-chart" data-toggle="tab">Area</a></li>*@
+
+                <li class="pull-left header"><i class="fa fa-inbox"></i>Create Medical Form</li>
+            </ul>
+            <div class="tab-content no-padding">
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DrugName, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-6">
+                            @Html.EditorFor(model => model.DrugName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.DrugName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Unit, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-6">
+                            @Html.EditorFor(model => model.Unit, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Unit, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DrugQty, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-6">
+                            @Html.EditorFor(model => model.DrugQty, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.DrugQty, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    @*<input type="button" id="Addmedicine" value="Add" class="btn btn-primary col-lg-3" />*@
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="button" id="Addmedicine" value="Add Medicine" class="btn btn-primary btn-lg-5" />
+                        </div>
+                    </div>
+                    <div class="" style="border-style:ridge" id="medicaltable">
+                       
+                    </div>
+                    <br />
+                   
+
+
+                </div>
+
+                @Html.HiddenFor(x => x.studentpk)
+               
+                @Html.ActionLink("Generate Pdf", "GeneratePdf", "AdminHandle", new { area = "Admin" }, new { @class = "fa fa-download btn btn-primary col-lg-offset-3 col-lg-2", @id = "pfdb" })
+              
+            </div>
+        </div>
+        <button type="button" class="btn btn-info btn-lg" id="hit" data-toggle="modal" data-target="#myModal">Open Modal</button>
+
+        <!-- Modal -->
+        <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title alert-link">Successful</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>@ViewBag.message</p>
+                    </div>
+                    <div class="modal-footer">
+                        @Html.ActionLink("Close", "AdminPanel", "AdminHandle", new { area = "Admin" }, new { @class = "btn btn btn-success btn-lg col-md-2 col-md-offset-5" })
+                        @* <button type="button" class="btn btn-default"  data-dismiss="modal">Close</button>*@
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+
+}
+
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        debugger;
+        $('#pfdb').attr('disabled', true);
+        $("#error").hide();
+        $(function () {
+            debugger;
+            $("#DrugName").autocomplete({
+                source: '@Url.Action("/GetMedicine")'
+            });
+        });
+       
+        $('#medicaltable').jtable({
+
+            title: 'Order Medicine',
+
+            paging: true, //Enable paging
+            pageSize: 10, //Set page size (default: 10)
+            sorting: true, //Enable sorting
+            defaultSorting: 'Name ASC', //Set default sorting
+            actions: {
+
+
+                listAction: '/AdminHandle/medicineselect',
+                createAction: '/GettingStarted/CreatePerson',
+                updateAction: '/GettingStarted/UpdatePerson',
+                deleteAction: '/GettingStarted/DeletePerson'
+            },
+
+
+            fields: {
+                Drugcode: {
+                    key: true,
+                    list:false,
+                    title: 'Drug Code',
+                    width: '25%',
+                    hidden:true
+                    
+                },
+                DrugName: {
+                    title: 'Drug Name',
+                    width: '25%',
+
+
+
+                },
+                DrugQty: {
+                    title: 'Quantity',
+                    width: '25%',
+
+                },
+
+                Unit: {
+                    title: 'Unit',
+                    width: '25%',
+
+                },
+
+            }
+
+
+        });
+        $('#medicaltable').jtable('load');
+        $(".jtable-toolbar").hide();
+        $(".jtable-command-column").hide();
+        $('#jtable-toolbar-item-icon').hide();
+        //$(".jtable-toolbar").hide();
+
+        $('#pfdb').attr('disabled', true);
+        $("#Addmedicine").click(function () {
+            //var DCode = $("#Drugcode").val();
+            var DName = $("#DrugName").val();
+            var DQty = $("#DrugQty").val();
+            var Dunit = $('#Unit').val();
+            debugger;
+            if (DName.length<=0||DQty.length<=0||Dunit.length<=0) {
+                $("#error").show();
+            }
+            else {
+                $.ajax({
+                    type: "POST",
+                    url: "/AdminHandle/AddSessionorderMedicine",
+                    //contentType: "application/json; charset=utf-8",
+                    data: { Dname: DName, Dqty: DQty, Dunit: Dunit },
+                    //dataType: "json",
+                    success: function (data) {
+                        $('#pfdb').attr('disabled', false);
+                        $("#error").hide();
+                        $("#DrugName").val(null);
+                        $("#DrugQty").val(null);
+                        $('#Unit').val(null);
+                        debugger;
+                        $('#medicaltable').jtable('load');
+                        $(".jtable-toolbar").hide();
+
+                    }
+
+
+                });
+            }
+            debugger;
+
+          
+        });
+        $("#hit").hide();
+        $("#Generate").click(function () {
+
+            debugger;
+
+            $.ajax({
+                type: "GET",
+                url: "/AdminHandle/pdf",
+
+                success: function (data) {
+
+
+
+                }
+
+
+            });
+        });
+
+
+    });
+
+</script>
+
+<div>
+    @ViewBag.Message
+</div>

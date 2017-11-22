@@ -1,0 +1,107 @@
+﻿@model SabraMedicalCenter.Areas.Admin.Models.StudentDetails
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>StudentDetails</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.studentregno)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.studentregno)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.age)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.age)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nicno)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nicno)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.gender)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.gender)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dataofbirth)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dataofbirth)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.faculty)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.faculty)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.year)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.year)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.rationanal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.rationanal)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.familymembers)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.familymembers)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fathernmae)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fathernmae)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.mothername)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mothername)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.studentname }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,245 @@
+﻿@model SabraMedicalCenter.Areas.Student.Models.StudentHistoryDTO
+
+@{
+    ViewBag.Title = "studenthistory";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+@*<link href="~/Content/bootstrap.min.css" rel="stylesheet" />*@
+<script src="~/Scripts/jquery-3.1.1.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+@*<link href="~/Content/StudentLayout.css" rel="stylesheet" />*@
+<script src="~/Scripts/jquery-ui.min.js"></script>
+<link href="~/Scripts/jquery-ui.min.css" rel="stylesheet" />
+<link href="~/Scripts/jtable/themes/metro/blue/jtable.min.css" rel="stylesheet" />
+@*<link href="~/scripts/jtable/themes/metro/red/jtable.min.css" rel="stylesheet" />*@
+<script src="~/Scripts/jtable/jquery.jtable.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        debugger;
+        $('#PersonTableContainer').jtable({
+
+
+            title: 'Student History',
+            sorting: true,
+            paging: true,
+            list:true,
+            pageSize: 15,
+            defaultSorting: 'disease ASC',
+
+            actions: {
+
+
+                listAction: '/Student/StudentDetails/HistoryDetails',
+                createAction: '/GettingStarted/CreatePerson',
+                updateAction: '/GettingStarted/UpdatePerson',
+                deleteAction: '/GettingStarted/DeletePerson'
+            },
+
+
+            fields: {
+                disease: {
+
+                    key: true,
+                    title: 'Disease',
+                    width: '10%',
+                    sorting: true,
+                    defaultSorting: 'disease ASC'
+
+                },
+                date: {
+                    title: 'Date',
+                    width: '20%',
+                    type: 'date',
+                    sorting:true,
+                    displayFormat: 'yy-mm-dd',
+                    defaultSorting: 'date ASC',
+                    edit:false
+
+                },
+                descrition: {
+                    title: 'Description',
+                    width: '20%',
+                    sorting: true,
+                    defaultSorting: 'descrition ASC',
+                    edit: false
+
+                },
+                medical: {
+                    title: 'Medical',
+                    width: '10%',
+                    defaultSorting: 'medical ASC',
+                    visibility:'hidden',
+                    sorting: true
+
+                },
+                drugname: {
+                    title: 'Drug Name',
+                    width: '20%',
+                    list: true,
+
+                    sorting: false,
+                    display: function (data) {
+                        debugger;
+                        var dru = "";
+                        for (var i = 0; i < data.record.drugname.length; i++) {
+                            if (data.record.drugname.length<2) {
+                                dru = dru + data.record.drugname[i] + '<hr>';
+                            }
+                            else
+                            {
+                                dru = dru + data.record.drugname[i] + '<hr>';
+                            }
+
+                        }
+                        return dru;
+
+
+                    }
+
+
+
+                },
+                drugqty: {
+                    title: 'Drug Quenty',
+                    width: '20%',
+                    edit:true,
+                    list: true,
+                    sorting: false,
+                    display: function (data) {
+                        debugger;
+                        var druq = "";
+                        for (var i = 0; i < data.record.drugqty.length; i++) {
+                            if (data.record.drugqty.length<2) {
+                                druq = druq + data.record.drugqty[i] + '<br/>';
+                            }
+                            else {
+                                druq = druq + data.record.drugqty[i] + '<hr>';
+                            }
+
+                        }
+                        return druq;
+
+
+                    }
+
+
+                }
+
+
+            }
+
+
+        });
+        $('#PersonTableContainer').jtable('load');
+        $('.jtable-toolbar-item').hide();
+        $('.jtable-command-column').hide();;
+    });
+
+</script>
+<div class="row   well" style="border-style:ridge">
+    <div class=" col-lg-10 col-lg-offset-1">
+    <div class="well">
+        <br /><br/>
+        <div class="" id="PersonTableContainer"></div>
+
+    </div>
+</div>
+    <style type="text/css">
+        .jtable-command-column{
+            visibility:hidden;
+        }
+    </style>
+    
+</div>
+@*<p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table active tab-content">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Student_History_Pk)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Student_Pk)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Disease)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Medical)
+            </th>
+            <th>
+                <table class="xxx">
+                    <tr>
+                        <td>dddd</td>
+                        <td>fvdv</td>
+                    </tr>
+
+                        <tr>
+                            <td></td>
+                            <td></td>
+                        </tr>
+
+                </table>
+            </th>
+            <th></th>
+        </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Student_History_Pk)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Student_Pk)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Disease)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Medical)
+
+            </td>
+            <td>
+
+                <table class="xxx">
+                   <tr>
+                       <td></td>
+                       <td></td>
+                   </tr>
+                    @foreach (var items in item.MC_Drug_History)
+                    {
+                        <tr>
+                            <td>@items.Drug_Name</td>
+                            <td>@items.Drug_Qty</td>
+                        </tr>
+                    }
+                </table>
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+    }
+
+    </table>*@
+
+

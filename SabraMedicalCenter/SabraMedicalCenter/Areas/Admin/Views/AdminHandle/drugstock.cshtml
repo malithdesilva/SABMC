@@ -1,0 +1,202 @@
+﻿@{
+    ViewBag.Title = "drugstock";
+    Layout = "~/Areas/Admin/Views/Shared/SideLayout.cshtml";
+}
+
+
+<script src="~/Scripts/jquery-ui.min.js"></script>
+<link href="~/Scripts/jquery-ui.min.css" rel="stylesheet" />
+<link href="~/Scripts/jtable/themes/metro/blue/jtable.min.css" rel="stylesheet" />
+<script src="~/Scripts/jtable/jquery.jtable.min.js"></script>
+
+@*<link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />*@
+<!-- Theme style -->
+<link href="~/Content/dist/css/AdminLTE.min.css" rel="stylesheet" />
+
+
+<br /> <br /> <br /><br /><br />
+
+
+
+<div class="panel-body  center-block">
+    <div class="row well center">
+        
+        <div class="col-md-3">
+
+            @Html.DropDownList("selectedvalue", new List<SelectListItem>
+
+                {
+                new SelectListItem() { Text ="Select Option" ,Value="selectoption"},
+                new SelectListItem() { Text ="Drug Code" ,Value="drugcode"},
+                new SelectListItem(){Text ="Drug Descrition" ,Value="drugdescrition"},
+                }, new { @class = "form-control" }
+                )
+
+        </div>
+        <div class="col-md-3">
+            <input type="text" id="Searchword" size="70" class="form-control" />
+        </div>
+        <div class="col-md-2">
+            <input type="button" id="drugsearch" value="Search" class="btn btn-primary form-control" />
+        </div>
+        &nbsp; &nbsp; &nbsp;&nbsp;
+       
+
+
+
+        <br /> <br /> <br /><br />
+        <div class="container">
+            <div class="row" id="PersonTableContainer"></div>
+        </div>
+    </div>
+
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        debugger;
+        $("#PersonTableContainer").jtable({
+
+
+
+            title: 'Drugs Stock',
+
+            sorting: true,
+            paging: true,
+            pageSize: 10,
+            defaultSorting: 'drugname ASC',
+            actions: {
+
+
+                listAction: '/AdminHandle/drugdetails',
+                createAction: '/AdminHandle/Createdrugdetails',
+                updateAction: '/GettingStarted/UpdatePerson',
+                deleteAction: '/AdminHandle/Deletedrugdetils'
+            },
+
+
+            fields: {
+
+                drugcode: {
+                    key: true,
+                    title: 'Drug Code',
+                    width: '10%',
+                    display: function (data) {
+                     
+                        return '<a href="/Admin/AdminHandle/drugdetailsaad?code=' + data.record.drugcode + '" style="font-size:15px;">' + data.record.drugcode + '</a>'
+                                               }
+
+                },
+                drugname: {
+                    title: 'Drug Name',
+                    width: '10%',
+
+
+                },
+                receivedate: {
+                    title: 'Receive Data',
+                    width: '10%',
+                    type: 'date',
+
+
+                },
+                exipiredate: {
+                    title: 'Exipire Date',
+                    width: '10%',
+                    type: 'date'
+                },
+                unit: {
+                    title: 'Unit',
+                    width: '10%',
+                    sorting: false,
+
+                },
+                quantity: {
+                    title: 'Quantity',
+                    width: '5%',
+                    sorting: false,
+                   
+
+                },
+              
+                balance: {
+                    title: 'balance',
+                    width: '5%',
+                    sorting: false,
+                    display: function (data) {
+                        debugger;
+                        if (data.record.balance <= 300) {
+                            $("data-record-key").css("background", "blue");
+                            $('.jtable-edit-command-button').hide();
+                          
+                            return data.record.balance;
+                           
+                        }
+
+                        else {
+                            $(".data-record-key").css("color", "red");
+                            $('.jtable-edit-command-button').hide();
+                          
+                            return data.record.balance;
+                           
+                        }
+                    }
+
+                }
+                   
+            }
+
+
+        });
+       
+        $("#PersonTableContainer").jtable('load');
+         $('.jtable-toolbar').hide();
+      
+        $('.jtable-edit-command-button').hide();
+     
+
+        $('#drugsearch').click(function () {
+
+            debugger;
+            var selectedtextid = $('#selectedvalue option:selected').text();
+            var selectedvalue = $('#Searchword').val();
+            if (selectedvalue == "") {
+
+
+            }
+
+            $.ajax({
+                type: "POST",
+                url: "/AdminHandle/AddSessiondrugtdetails",
+                //contentType: "application/json; charset=utf-8",
+                data: { selectedtextid: selectedtextid, selectedvalue: selectedvalue },
+                //dataType: "json",
+                success: function (data) {
+
+                    // $("#DrugName").val(null);
+                    //$("#DrugQty").val(null);
+                    debugger;
+                    $('#PersonTableContainer').jtable('load');
+                   // $('.jtable-toolbar').hide();
+                    $('.jtable-edit-command-button').hide();
+
+
+                }
+
+
+            });
+
+        })
+
+    });
+
+</script>
+
+<style>
+    b {
+        font-size: 15px;
+        padding: 5px;
+        background-color: #ff0000;
+    }
+</style>
